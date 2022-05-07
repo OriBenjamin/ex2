@@ -9,7 +9,7 @@ using std::cout;
 using std::endl;
 using std::string;
  
-Player::Player(char* name, int maxHP = DEFAULT_MAX_HP, int force = DEFAULT_FORCE)
+Player::Player(const char* name, int maxHP, int force)
 {
     this->name = name;
     this->level = 1;
@@ -34,7 +34,7 @@ void Player::printInfo()
 
 void Player::levelUp()
 {
-    if(this->player < 10)
+    if(this->level < 10)
     {
         this->level++;
     }
@@ -67,7 +67,7 @@ void Player::heal(int healAmount)
 
 void Player::damage(int damageAmount)
 {
-    if(damage>0)
+    if(damageAmount>0)
     {
         this->hp -= damageAmount;   
         if(this->hp < 0)

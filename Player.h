@@ -11,15 +11,15 @@
 
 class Player 
 {
-    char* name;
-    int level
+    const char* name;
+    int level;
     int coins;
     int maxHP;
     int hp;
     int force;
 
     public:
-        Player(char* name, int maxHP = DEFAULT_MAX_HP, int force = DEFAULT_FORCE);
+        Player(const char* name, int maxHP = DEFAULT_MAX_HP, int force = DEFAULT_FORCE);
         
         Player(const Player&) = default;
         ~Player() = default;
@@ -37,6 +37,6 @@ class Player
         int getAttackStrength();
 
 
-}
+};
 
 #endif //PLAYER_H
