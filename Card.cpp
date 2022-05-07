@@ -16,10 +16,12 @@ void Card::applyEncounter(Player& player) const
         {
             player.levelUp();
             player.addCoins(this->m_stats.loot);
+            printBattleResult(true);
         }
         else
         {
             player.damage(this->m_stats.hpLossOnDefeat);
+            printBattleResult(false);
         }
     }
     if(this->m_effect == CardType::Buff)

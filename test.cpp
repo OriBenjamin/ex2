@@ -81,7 +81,7 @@ void run_test(std::function<bool()> test, std::string test_name){
 }
 
 int main(int argc, char *argv[]) {
-    const int NUMBER_OF_TESTS = 2; //3
+    const int NUMBER_OF_TESTS = 3; //3
     std::function<bool()> tests[NUMBER_OF_TESTS] = {
         testPlayer,
         testCard,

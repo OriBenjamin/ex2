@@ -2,8 +2,8 @@
 // Created by Daniel_Meents on 07/04/2022.
 //
 
-#ifndef EX2_GAME_H
-#define EX2_GAME_H
+#ifndef MTMCHKIN_H
+#define MTMCHKIN_H
 #include "Card.h"
 #include <iostream>
 
@@ -62,15 +62,16 @@ public:
     *   @return
     *           cards array size
     */
-    int Mtmchkin::getCardsArraySize(Card* cardsArray);
+    int getCardsArraySize(Card* cardsArray);
 
 
 private:
-    const Player m_player;
+    Player m_player;
     const Card* m_cardsArray;
     GameStatus m_gameStatus;
+    int m_numOfCards;
 
 };
 
 
-#endif //EX2_GAME_H
+#endif //MTMCHKIN_H
