@@ -57,10 +57,18 @@ public:
      */
     GameStatus getGameStatus() const;
 
-    //TODO: complete the Mtmchkin class.
+    /*
+    *   Get the size of the cards array:
+    *   @return
+    *           cards array size
+    */
+    int Mtmchkin::getCardsArraySize(Card* cardsArray);
+
 
 private:
-    //TODO: complete the Mtmchkin class.
+    const Player m_player;
+    const Card* m_cardsArray;
+    GameStatus m_gameStatus;
 
 };
 
