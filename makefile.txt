@@ -1,0 +1,17 @@
+COMPILER = gcc
+OBJS = Player.o Card.o test.o
+EXEC = Test
+DEBUG_FLAG = -g
+COMP_FLAG = -std=c99 -Wall -Werror
+
+$(EXEC) : $(OBJS)
+	$(COMPILER) $(DEBUG_FLAG) $(OBJS) -o $@
+Player.o Player.cpp Player.h
+	$(COMPILER) -c $(DEBUG_FLAG) $(COMP_FLAG) Player.cpp
+Card.o: Card.c Card.h Player.h
+	$(COMPILER) -c $(DEBUG_FLAG) $(COMP_FLAG) Card.cpp
+test.o: test.cpp Card.h Player.h
+	$(COMPILER) -c $(DEBUG_FLAG) $(COMP_FLAG) test.cpp
+clean:
+	rm -f $(OBJS) $(EXEC)
+	
