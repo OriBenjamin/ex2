@@ -29,7 +29,6 @@ public:
     */
     Mtmchkin(const char* playerName, const Card* cardsArray, int numOfCards);
 
-
     /*
      * Play the next Card - according to the instruction in the exercise document
      *
@@ -58,15 +57,14 @@ public:
     GameStatus getGameStatus() const;
 
     /*
-    *   Get the size of the cards array:
-    *   @return
-    *           cards array size
+     * D'tor of the game:
+     * @result
+     *      Object fields are destroyed at Delete function / end of program
     */
-    int getCardsArraySize(Card* cardsArray);
-
+    ~Mtmchkin();
 
 private:
-    Player m_player;
+    Player* m_player;
     const Card* m_cardsArray;
     GameStatus m_gameStatus;
     int m_numOfCards;

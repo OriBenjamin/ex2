@@ -3,26 +3,15 @@
 using std::cout;
 using std::endl;
 using std::string;
-//using namespace std?/?? why we didnt use it; also- what include and namespaces do we need;
 
 
-Mtmchkin::Mtmchkin(const char* playerName, const Card* cardsArray, int numOfCards):
-m_player(*(new Player(playerName))), m_cardsArray(cardsArray), m_gameStatus(GameStatus::MidGame),
-m_numOfCards(numOfCards)
-{
-    /*
-    //ori what to do if the input is not valid
-    //how the fuck i create a default player?!
-    Player *player(playerName,0,0) = new Player;
-    this->m_player = *player; //or use it-this->m_player.Player(playerName);
-    //ori-do we need name for new array? 
-    Cards cards = new Cards[numOfCards];
-    if(!cards) //allocation failed
+    Mtmchkin::Mtmchkin(const char* playerName, const Card* cardsArray, int numOfCards):
+    m_player(new Player(playerName)), 
+    m_cardsArray(NULL), 
+    m_gameStatus(GameStatus::MidGame), 
+    m_numOfCards(numOfCards)
     {
-       this->numOfCards = 0;
-       this->m_cardsArray = NULL;
-    } else
-    {
+        Card* cards = new Card[numOfCards];
         for(int i = 0; i < numOfCards; i++)
         {
             cards[i] = cardsArray[i];
@@ -31,20 +20,15 @@ m_numOfCards(numOfCards)
     }
 
 
-        //this->m_cardsArray = cardsArray
-    this->m_gameStatus = MidGame;*/
-}
-
-
     void Mtmchkin::playNextCard()
     {
-        int cardsArraySize = this->m_numOfCards; //ori- meybe Mtmchkin.getCardsArraySize?
+        int cardsArraySize = this->m_numOfCards;
         int currentCardIndex = 0;
-        while(!Mtmchkin::isOver()) //ori- same as above...
+        while(!Mtmchkin::isOver())
         {
             this->m_cardsArray[currentCardIndex].printInfo();
-            this->m_cardsArray[currentCardIndex].applyEncounter(this->m_player);
-            this->m_player.printInfo();
+            this->m_cardsArray[currentCardIndex].applyEncounter(*(this->m_player));
+            this->m_player->printInfo();
             if(currentCardIndex == cardsArraySize-1)
             {
                 currentCardIndex = -1;
@@ -53,34 +37,29 @@ m_numOfCards(numOfCards)
         }
     }
 
-    int Mtmchkin::getCardsArraySize(Card* cardsArray)
-    {
-        int size = 0;
-        while(cardsArray)
-        {
-            size++;
-            cardsArray++;
-        }
-        return size;
-    }
-
     bool Mtmchkin::isOver()
     {
-        if(this->m_player.getLevel() == 10)
+        if(this->m_player->getLevel() == 10)
         {
-            this->m_gameStatus = GameStatus::Win; //ori they didnt tell me to update gmae status...
+            this->m_gameStatus = GameStatus::Win; 
             return true;
         }
-        if(this->m_player.isKnockedOut())
+        if(this->m_player->isKnockedOut())
         {
-            this->m_gameStatus = GameStatus::Loss; //ori they didnt tell me to update gmae status...
+            this->m_gameStatus = GameStatus::Loss;
             return true;
         }
         return false;
     }
 
+     Mtmchkin::~Mtmchkin()
+     {
+        delete this->m_player;
+        delete[] this->m_cardsArray;
+     }
 
-    GameStatus Mtmchkin::getGameStatus() const //ori-do we need to remain th const here?
+
+    GameStatus Mtmchkin::getGameStatus() const
     {
         return this->m_gameStatus;
     }

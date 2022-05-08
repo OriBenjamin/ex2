@@ -11,12 +11,12 @@
 
 class Player 
 {
-    const char* name;
-    int level;
-    int coins;
-    int maxHP;
-    int hp;
-    int force;
+    const char* m_name;
+    int m_level;
+    int m_coins;
+    int m_maxHP;
+    int m_hp;
+    int m_force;
 
     public:
         Player(const char* name, int maxHP = DEFAULT_MAX_HP, int force = DEFAULT_FORCE);

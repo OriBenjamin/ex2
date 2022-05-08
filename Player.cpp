@@ -11,45 +11,45 @@ using std::string;
  
 Player::Player(const char* name, int maxHP, int force)
 {
-    this->name = name;
-    this->level = 1;
-    this->coins = 0;
-    this->force = force;
-    this->maxHP = maxHP;
-    if(this->maxHP<0)
+    this->m_name = name;
+    this->m_level = 1;
+    this->m_coins = 0;
+    this->m_force = force;
+    this->m_maxHP = maxHP;
+    if(this->m_maxHP<0)
     {
-        this->maxHP = DEFAULT_MAX_HP;
+        this->m_maxHP = DEFAULT_MAX_HP;
     }
-    this->hp = maxHP;
-    if(this->force<0)
+    this->m_hp = maxHP;
+    if(this->m_force<0)
     {
-        this->force = DEFAULT_FORCE;
+        this->m_force = DEFAULT_FORCE;
     }
 }
 
 void Player::printInfo()
 {
-    printPlayerInfo(this->name,this->level,this->force,this->hp,this->coins);
+    printPlayerInfo(this->m_name,this->m_level,this->m_force,this->m_hp,this->m_coins);
 }
 
 void Player::levelUp()
 {
-    if(this->level < 10)
+    if(this->m_level < 10)
     {
-        this->level++;
+        this->m_level++;
     }
 }
 
 int Player::getLevel()
 {
-    return this->level;   
+    return this->m_level;   
 }
 
 void Player::buff(int buffAmount)
 {
     if(buffAmount>0)
     {
-        this->force += buffAmount;   
+        this->m_force += buffAmount;   
     }
 }
 
@@ -57,10 +57,10 @@ void Player::heal(int healAmount)
 {
     if(healAmount>0)
     {
-        this->hp += healAmount;   
-        if(this->hp > this->maxHP)
+        this->m_hp += healAmount;   
+        if(this->m_hp > this->m_maxHP)
         {
-            this->hp = this->maxHP;
+            this->m_hp = this->m_maxHP;
         }
     }
 }
@@ -69,39 +69,39 @@ void Player::damage(int damageAmount)
 {
     if(damageAmount>0)
     {
-        this->hp -= damageAmount;   
-        if(this->hp < 0)
+        this->m_hp -= damageAmount;   
+        if(this->m_hp < 0)
         {
-            this->hp = 0;
+            this->m_hp = 0;
         }
     }
 }
 
 bool Player::isKnockedOut()
 {
-    return (this->hp == 0);
+    return (this->m_hp == 0);
 }
 
 void Player::addCoins(int coinsAmount) 
 {
     if(coinsAmount>0)
     {
-        this->coins += coinsAmount; 
+        this->m_coins += coinsAmount; 
     }  
 }
 
 bool Player::pay(int payAmount)
 {
     
-    if(payAmount < 0 ||this->coins < payAmount)
+    if(payAmount < 0 ||this->m_coins < payAmount)
     {
         return false;
     }  
-    this->coins -= payAmount;
+    this->m_coins -= payAmount;
     return true;
 }
 
 int Player::getAttackStrength()
 {
-    return this->force + this->level;
+    return this->m_force + this->m_level;
 }
