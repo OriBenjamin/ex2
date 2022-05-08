@@ -2,23 +2,25 @@
 #include "utilities.h"
 #include "Card.h"
 
-Card::Card(CardType type, const CardStats& stats)
-{
-    this->m_effect = type;
-    this->m_stats = stats;
-}
+//Card constructor- update Cards fields according to the given parameters
+Card::Card(CardType type, const CardStats& stats):
+m_effect(type),
+m_stats(stats)
+{}
 
+//applying an encountering of the player with a card
 void Card::applyEncounter(Player& player) const
 {
     if(this->m_effect == CardType::Battle)
     {
+        //the player is strong then the cards character
         if(player.getAttackStrength() >= this->m_stats.force)
         {
             player.levelUp();
             player.addCoins(this->m_stats.loot);
             printBattleResult(true);
         }
-        else
+        else //the player is weak strong then the cards character
         {
             player.damage(this->m_stats.hpLossOnDefeat);
             printBattleResult(false);
@@ -26,6 +28,7 @@ void Card::applyEncounter(Player& player) const
     }
     if(this->m_effect == CardType::Buff)
     {
+        //the player has enugh money for buying force points
         if(player.pay(this->m_stats.cost))
         {
             player.buff(this->m_stats.buff);
@@ -33,6 +36,7 @@ void Card::applyEncounter(Player& player) const
     }
     if(this->m_effect == CardType::Heal)
     {
+        //the player has enugh money for buying heal points
         if(player.pay(this->m_stats.cost))
         {
             player.heal(this->m_stats.heal);
@@ -44,6 +48,7 @@ void Card::applyEncounter(Player& player) const
     }
 }
 
+//prints card info according to its type
 void Card::printInfo() const
 {
     if(this->m_effect == CardType::Battle)
