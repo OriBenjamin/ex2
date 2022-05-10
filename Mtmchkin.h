@@ -45,7 +45,7 @@ public:
      *          True if the game ended
      *          False otherwise
      */
-    bool isOver();
+    bool isOver() ;
 
 
     /*
@@ -68,6 +68,7 @@ private:
     const Card* m_cardsArray;
     GameStatus m_gameStatus;
     int m_numOfCards;
+    int m_currentCard;
 
 };
 

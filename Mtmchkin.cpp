@@ -6,7 +6,8 @@
     m_player(new Player(playerName)), 
     m_cardsArray(NULL), 
     m_gameStatus(GameStatus::MidGame), 
-    m_numOfCards(numOfCards)
+    m_numOfCards(numOfCards),
+    m_currentCard(0)
     {
         //copies the given cards array into a new cards array which m_cardsArray is pointing to
         Card* cards = new Card[numOfCards];
@@ -17,39 +18,34 @@
         this->m_cardsArray = cards;
     }
 
-    //pulls the next card from the deck, and updates the player's data after card encountering
+    //pulls the next card and updates the player's data after card encountering
     void Mtmchkin::playNextCard()
-    {
+    {   
         int cardsArraySize = this->m_numOfCards;
-        int currentCardIndex = 0;
-        //pulling cards until the gmae is over
-        while(!Mtmchkin::isOver())
-        {
-            this->m_cardsArray[currentCardIndex].printInfo();
-            this->m_cardsArray[currentCardIndex].applyEncounter(*(this->m_player));
-            this->m_player->printInfo();
-            if(currentCardIndex == cardsArraySize-1)
-            {
-                currentCardIndex = -1;
-            }
-            currentCardIndex++;
-        }
-    }
-
-    //finish the game when the player has won or lost
-    bool Mtmchkin::isOver()
-    {
+        //pulling the next card and applying encounter
+        this->m_cardsArray[m_currentCard].printInfo();
+        this->m_cardsArray[m_currentCard].applyEncounter(*(this->m_player));
+        this->m_player->printInfo();
         if(this->m_player->getLevel() == 10)
         {
             this->m_gameStatus = GameStatus::Win; 
-            return true;
         }
         if(this->m_player->isKnockedOut())
         {
             this->m_gameStatus = GameStatus::Loss;
-            return true;
         }
-        return false;
+        //if reached the end, return to start of deck
+        if(m_currentCard == cardsArraySize-1)
+        {
+            m_currentCard = -1;
+        }
+        m_currentCard++;
+    }
+
+    //finishes the game when the player has won or lost
+    bool Mtmchkin::isOver() 
+    {
+        return this->m_gameStatus!=GameStatus::MidGame;
     }
 
     //Mtmchkin destructor

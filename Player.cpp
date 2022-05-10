@@ -105,10 +105,14 @@ void Player::addCoins(int coinsAmount)
 //decreasing players coins depending the payment he made
 bool Player::pay(int payAmount)
 {
-    if(payAmount < 0 ||this->m_coins < payAmount)
+    if(this->m_coins < payAmount)
     {
         return false;
     }  
+    if(payAmount <= 0 )
+    {
+        return true;
+    }
     this->m_coins -= payAmount;
     return true;
 }
