@@ -7,10 +7,11 @@
 #include <iostream>
 const int DEFAULT_FORCE = 5;
 const int DEFAULT_MAX_HP = 100;
+using std::string;
 
 class Player 
 {
-    std::string m_name;
+    string m_name;
     int m_level;
     int m_coins;
     int m_maxHP;
