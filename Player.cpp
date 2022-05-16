@@ -12,7 +12,7 @@ using std::string;
 /*Player constructor- update Players fields according to the given parameters
 or defaults values*/
 Player::Player(const char* name, int maxHP, int force):
-m_name(name),
+m_name(string(name)),
 m_level(1),
 m_coins(0),
 m_maxHP(maxHP),
@@ -34,7 +34,7 @@ m_force(force)
 //prints player info
 void Player::printInfo()
 {
-    printPlayerInfo(this->m_name,this->m_level,this->m_force,this->m_hp,this->m_coins);
+    printPlayerInfo(this->m_name.c_str(),this->m_level,this->m_force,this->m_hp,this->m_coins);
 }
 
 //increasing players level

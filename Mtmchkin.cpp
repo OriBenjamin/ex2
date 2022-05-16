@@ -20,7 +20,7 @@
 
     //pulls the next card and updates the player's data after card encountering
     void Mtmchkin::playNextCard()
-    {   
+    {
         int cardsArraySize = this->m_numOfCards;
         //pulling the next card and applying encounter
         this->m_cardsArray[m_currentCard].printInfo();

@@ -5,13 +5,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <iostream>
-
-#define DEFAULT_FORCE 5
-#define DEFAULT_MAX_HP 100
+const int DEFAULT_FORCE = 5;
+const int DEFAULT_MAX_HP = 100;
 
 class Player 
 {
-    const char* m_name;
+    std::string m_name;
     int m_level;
     int m_coins;
     int m_maxHP;
